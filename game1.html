@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<!--
+	Interphase by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <title>Game</title>
+    <style type="text/css">
+        body {
+            font-family: verdana;
+        }
+        
+        #result {
+            height: 200px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 0 10px 0 #bbb;
+            margin-bottom: 30px;
+            font-size: 14px;
+            line-height: 25px;
+        }
+    </style>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-layers.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-xlarge.css" />
+    </noscript>
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="#">WebKit Demo</a></h1>
+    </header>
+
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="container">
+
+            <header class="major">
+                <h2>Say Informatica!</h2>
+                <p>Mission: 다음 문장을 말해서 컴퓨터를 이해시켜보세요!</p>
+            </header>
+            <section>
+                    <p id="question_text"><h3 align="center"></h3></p>
+            </section>
+            <!-- Text -->
+            <section>
+                <div id="result"></div>
+                <h5 align="center"><button onclick="start();" class="button big">시작!</button></h5>
+                <script type="text/javascript">
+                    var ans="대구과학고등학교";
+                    var r = document.getElementById('result');
+                    var question_text = document.getElementById('question_text');
+                    var finalTranscripts = '';
+
+                    var q_num=1;
+                    var correct=0;
+                    var i=0;
+
+                    function start() {
+                        for(i=0; i<3; i++) {
+                            question_text.innerHTML = "대구과학고등하교";
+                            if ('webkitSpeechRecognition' in window) {
+                                var speechRecognizer = new webkitSpeechRecognition();
+                                speechRecognizer.continuous = true;
+                                speechRecognizer.interimResults = true;
+                                speechRecognizer.lang = 'en-IN';
+                                speechRecognizer.start();
+
+
+                                speechRecognizer.onresult = function (event) {
+                                    var interimTranscripts = '';
+                                    for (var i = event.resultIndex; i < event.results.length; i++) {
+                                        var transcript = event.results[i][0].transcript;
+                                        transcript.replace("\n", "<br>");
+                                        if (event.results[i].isFinal) {
+                                            finalTranscripts += transcript;
+                                        } else {
+                                            interimTranscripts += transcript;
+                                        }
+                                    }
+                                    r.innerHTML = finalTranscripts + '<span style="color:#999">' + interimTranscripts + '</span>';
+                                };
+                                speechRecognizer.onerror = function (event) {};
+                            } else {
+                                r.innerHTML = 'NA'; // 이 브라우저가 지원하지 않는다.
+                            }
+                            
+                            if(finalTranscripts==ans) {
+                                alert("정답입니다!");
+                                break;
+                            } else {
+                                alert("틀렸습니다!");
+                                break;
+                            }
+                        }
+                    }
+                </script>
+
+            </section>
+
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <section class="4u$ 12u$(medium) 12u$(small)">
+                    <ul class="tabular">
+                        <li>
+                            <h3>Adress</h3> Daegu Science High School
+                        </li>
+                        <li>
+                            <h3>Developer</h3>Informatica 장준서
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            <ul class="copyright">
+                <li>&copy; Informatica All rights reserved.</li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+
+</html>
