@@ -302,10 +302,8 @@ if (!('webkitSpeechRecognition' in window)) {
       } else {
         interim_transcript += event.results[i][0].transcript;
       }
-      //document.write(event.results[i][0].transcript);
-
         if(event.results[i].transcript.localeCompare(str_infomatica)==0) {
-            document.write(event.results[i].transcript);
+            document.write(event.results[i][0].transcript);
         }
     }
     final_transcript = capitalize(final_transcript);
