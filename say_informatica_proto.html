@@ -266,10 +266,12 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.onend = function() {
     recognizing = false;
     if (ignore_onend) {
+    
       return;
     }
     start_img.src = 'mic.gif';
     if (!final_transcript) {
+        showInfo('info_start');
       return;
     }
     showInfo('');
