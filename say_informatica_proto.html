@@ -194,28 +194,14 @@ var chrmMenuBar = new chrm.ui.MenuBar();
 // If you modify this array, also update default language / dialect below.
 var langs =
 [['한국어',            ['ko-KR']],
- ['English',         ['en-AU', 'Australia'],
-                     ['en-CA', 'Canada'],
-                     ['en-IN', 'India'],
-                     ['en-KE', 'Kenya'],
-                     ['en-TZ', 'Tanzania'],
-                     ['en-GH', 'Ghana'],
-                     ['en-NZ', 'New Zealand'],
-                     ['en-NG', 'Nigeria'],
-                     ['en-ZA', 'South Africa'],
-                     ['en-PH', 'Philippines'],
-                     ['en-GB', 'United Kingdom'],
+ ['English',         ['en-GB', 'United Kingdom'],
                      ['en-US', 'United States']],
  ['Français',        ['fr-FR']],
- ['Italiano',        ['it-IT', 'Italia'],
-                     ['it-CH', 'Svizzera']],
  ['中文',             ['cmn-Hans-CN', '普通话 (中国大陆)'],
                      ['cmn-Hans-HK', '普通话 (香港)'],
                      ['cmn-Hant-TW', '中文 (台灣)'],
                      ['yue-Hant-HK', '粵語 (香港)']],
- ['日本語',           ['ja-JP']],
- ['हिन्दी',             ['hi-IN']],
- ['ภาษาไทย',         ['th-TH']]];
+ ['日本語',           ['ja-JP']]];
 
 for (var i = 0; i < langs.length; i++) {
   select_language.options[i] = new Option(langs[i][0], i);
@@ -284,7 +270,6 @@ if (!('webkitSpeechRecognition' in window)) {
     }
     start_img.src = 'mic.gif';
     if (!final_transcript) {
-      showInfo('info_start');
       return;
     }
     showInfo('');
@@ -321,7 +306,7 @@ if (!('webkitSpeechRecognition' in window)) {
     final_transcript = capitalize(final_transcript);
     final_span.innerHTML = linebreak(final_transcript);
     if(final_transcript.localeCompare(str_infomatica)==0) {
-        alert("1");
+        document.write(final_transcript);
     }
     interim_span.innerHTML = linebreak(interim_transcript);
     if (final_transcript || interim_transcript) {
