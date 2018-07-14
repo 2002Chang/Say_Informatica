@@ -14,7 +14,7 @@
   </style>
   <div id="div_start">
     <button id="start_button" onclick="startButton(event)"><img alt="Start" id="start_img"
-    src="mic.gif"></button>
+    src=""></button>
   </div>
   <div class="words" contenteditable>
   </div>
@@ -31,7 +31,6 @@
   words.appendChild(p);
 
   recognition.addEventListener('result', e => {
-    start_img.src = '/intl/en/chrome/assets/common/images/content/mic-animate.gif';
     const transcript = Array.from(e.results)
       .map(result => result[0])
       .map(result => result.transcript)
