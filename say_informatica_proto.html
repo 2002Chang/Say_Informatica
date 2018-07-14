@@ -302,12 +302,12 @@ if (!('webkitSpeechRecognition' in window)) {
       } else {
         interim_transcript += event.results[i][0].transcript;
       }
+      if(event.results[i][0].transcript.localeCompare(str_infomatica)==0) {
+        document.write(final_transcript);
+        }
     }
     final_transcript = capitalize(final_transcript);
     final_span.innerHTML = linebreak(final_transcript);
-    if(final_transcript.localeCompare(str_infomatica)==0) {
-        document.write(final_transcript);
-    }
     interim_span.innerHTML = linebreak(interim_transcript);
     if (final_transcript || interim_transcript) {
       showButtons('inline-block');
