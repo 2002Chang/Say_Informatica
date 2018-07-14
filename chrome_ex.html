@@ -17,7 +17,7 @@
     "Google Chrome is a browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier."
     name="description">
     <title>
-      Say Informatica
+      Chrome Browser
     </title>
     <link href="https://plus.google.com/100585555255542998765" rel="publisher">
     <link href="//www.google.com/images/icons/product/chrome-32.png" rel="icon" type="image/ico">
@@ -32,15 +32,8 @@ new gweb.analytics.AutoTrack({
         });
     </script>
     <style>
-        html {
-      font-size: 10px;
-    }
-
-    body {
-      background:#ffc600;
-      font-family: 'helvetica neue';
-      font-weight: 200;
-      font-size: 20px;
+#info {
+    font-size: 20px;
     }
     #div_start {
     float: right;
@@ -49,16 +42,12 @@ new gweb.analytics.AutoTrack({
     text-decoration: none
     }
     #results {
-        max-width:500px;
-      margin:50px auto;
-      background:white;
-      border-radius:5px;
-      box-shadow:10px 10px 0 rgba(0,0,0,0.1);
-      padding:1rem 2rem 1rem 5rem;
-      background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
-      background-size: 100% 3rem;
-      position: relative;
-      line-height:3rem;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: left;
+    min-height: 150px;
     }
     #start_button {
     border: 0;
@@ -102,15 +91,16 @@ a.c1 {font-weight: normal;}
     <div class="browser-landing" id="main">
       <div class="compact marquee-stacked" id="marquee">
         <div class="marquee-copy">
-          <h1 align="center">
-            Say Informatica
+          <h1>
+            <a class="c1" href="http://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html">Web
+            Speech API</a> Demonstration
           </h1>
         </div>
       </div>
       <div class="compact marquee">
         <div id="info">
-          <p id="info_start" align="center">
-            마이크 버튼을 누르고 컴퓨터와 말을 해봐요!
+          <p id="info_start">
+            Click on the microphone icon and begin speaking for as long as you like.
           </p>
           <p id="info_speak_now" style="display:none">
             Speak now.
@@ -142,7 +132,7 @@ a.c1 {font-weight: normal;}
         </div>
         <div id="div_start">
           <button id="start_button" onclick="startButton(event)"><img alt="Start" id="start_img"
-          src="mic.gif"></button>
+          src="/intl/en/chrome/assets/common/images/content/mic.gif"></button>
         </div>
         <div id="results">
           <span class="final" id="final_span"></span> <span class="interim" id=
@@ -174,7 +164,7 @@ a.c1 {font-weight: normal;}
             </select>
         </div>
       </div>
-    </div><script src="www.google.com/intl/en/chrome/assets/common/js/chrome.min.js">
+    </div><script src="/intl/en/chrome/assets/common/js/chrome.min.js">
 </script> <script>
 var chrmMenuBar = new chrm.ui.MenuBar();
       chrmMenuBar.decorate('nav');
@@ -344,17 +334,17 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.onstart = function() {
     recognizing = true;
     showInfo('info_speak_now');
-    start_img.src = 'mic-animate.gif';
+    start_img.src = '/intl/en/chrome/assets/common/images/content/mic-animate.gif';
   };
 
   recognition.onerror = function(event) {
     if (event.error == 'no-speech') {
-      start_img.src = 'mic.gif';
+      start_img.src = '/intl/en/chrome/assets/common/images/content/mic.gif';
       showInfo('info_no_speech');
       ignore_onend = true;
     }
     if (event.error == 'audio-capture') {
-      start_img.src = 'mic.gif';
+      start_img.src = '/intl/en/chrome/assets/common/images/content/mic.gif';
       showInfo('info_no_microphone');
       ignore_onend = true;
     }
@@ -373,7 +363,7 @@ if (!('webkitSpeechRecognition' in window)) {
     if (ignore_onend) {
       return;
     }
-    start_img.src = 'mic.gif';
+    start_img.src = '/intl/en/chrome/assets/common/images/content/mic.gif';
     if (!final_transcript) {
       showInfo('info_start');
       return;
@@ -475,7 +465,7 @@ function startButton(event) {
   ignore_onend = false;
   final_span.innerHTML = '';
   interim_span.innerHTML = '';
-  start_img.src = 'mic-slash.gif';
+  start_img.src = '/intl/en/chrome/assets/common/images/content/mic-slash.gif';
   showInfo('info_allow');
   showButtons('none');
   start_timestamp = event.timeStamp;
