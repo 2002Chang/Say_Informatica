@@ -131,6 +131,10 @@ a.c1 {font-weight: normal;}
           <p id="info_upgrade" style="display:none">
             이 앱은 크롬 브라우저에서 만 작동됩니다!
           </p>
+
+          <p id="str_informatica_recog" style="display:none">
+                인포매티카!! 감사합니다.
+          </p>
         </div>
         <div id="div_start">
           <button id="start_button" onclick="startButton(event)"><img alt="Start" id="start_img"
@@ -190,17 +194,6 @@ var chrmMenuBar = new chrm.ui.MenuBar();
 // If you modify this array, also update default language / dialect below.
 var langs =
 [['한국어',            ['ko-KR']],
- ['Afrikaans',       ['af-ZA']],
- ['አማርኛ',           ['am-ET']],
- ['Azərbaycanca',    ['az-AZ']],
- ['বাংলা',            ['bn-BD', 'বাংলাদেশ'],
-                     ['bn-IN', 'ভারত']],
- ['Bahasa Indonesia',['id-ID']],
- ['Bahasa Melayu',   ['ms-MY']],
- ['Català',          ['ca-ES']],
- ['Čeština',         ['cs-CZ']],
- ['Dansk',           ['da-DK']],
- ['Deutsch',         ['de-DE']],
  ['English',         ['en-AU', 'Australia'],
                      ['en-CA', 'Canada'],
                      ['en-IN', 'India'],
@@ -213,76 +206,9 @@ var langs =
                      ['en-PH', 'Philippines'],
                      ['en-GB', 'United Kingdom'],
                      ['en-US', 'United States']],
- ['Español',         ['es-AR', 'Argentina'],
-                     ['es-BO', 'Bolivia'],
-                     ['es-CL', 'Chile'],
-                     ['es-CO', 'Colombia'],
-                     ['es-CR', 'Costa Rica'],
-                     ['es-EC', 'Ecuador'],
-                     ['es-SV', 'El Salvador'],
-                     ['es-ES', 'España'],
-                     ['es-US', 'Estados Unidos'],
-                     ['es-GT', 'Guatemala'],
-                     ['es-HN', 'Honduras'],
-                     ['es-MX', 'México'],
-                     ['es-NI', 'Nicaragua'],
-                     ['es-PA', 'Panamá'],
-                     ['es-PY', 'Paraguay'],
-                     ['es-PE', 'Perú'],
-                     ['es-PR', 'Puerto Rico'],
-                     ['es-DO', 'República Dominicana'],
-                     ['es-UY', 'Uruguay'],
-                     ['es-VE', 'Venezuela']],
- ['Euskara',         ['eu-ES']],
- ['Filipino',        ['fil-PH']],
  ['Français',        ['fr-FR']],
- ['Basa Jawa',       ['jv-ID']],
- ['Galego',          ['gl-ES']],
- ['ગુજરાતી',           ['gu-IN']],
- ['Hrvatski',        ['hr-HR']],
- ['IsiZulu',         ['zu-ZA']],
- ['Íslenska',        ['is-IS']],
  ['Italiano',        ['it-IT', 'Italia'],
                      ['it-CH', 'Svizzera']],
- ['ಕನ್ನಡ',             ['kn-IN']],
- ['ភាសាខ្មែរ',          ['km-KH']],
- ['Latviešu',        ['lv-LV']],
- ['Lietuvių',        ['lt-LT']],
- ['മലയാളം',          ['ml-IN']],
- ['मराठी',             ['mr-IN']],
- ['Magyar',          ['hu-HU']],
- ['ລາວ',              ['lo-LA']],
- ['Nederlands',      ['nl-NL']],
- ['नेपाली भाषा',        ['ne-NP']],
- ['Norsk bokmål',    ['nb-NO']],
- ['Polski',          ['pl-PL']],
- ['Português',       ['pt-BR', 'Brasil'],
-                     ['pt-PT', 'Portugal']],
- ['Română',          ['ro-RO']],
- ['සිංහල',          ['si-LK']],
- ['Slovenščina',     ['sl-SI']],
- ['Basa Sunda',      ['su-ID']],
- ['Slovenčina',      ['sk-SK']],
- ['Suomi',           ['fi-FI']],
- ['Svenska',         ['sv-SE']],
- ['Kiswahili',       ['sw-TZ', 'Tanzania'],
-                     ['sw-KE', 'Kenya']],
- ['ქართული',       ['ka-GE']],
- ['Հայերեն',          ['hy-AM']],
- ['தமிழ்',            ['ta-IN', 'இந்தியா'],
-                     ['ta-SG', 'சிங்கப்பூர்'],
-                     ['ta-LK', 'இலங்கை'],
-                     ['ta-MY', 'மலேசியா']],
- ['తెలుగు',           ['te-IN']],
- ['Tiếng Việt',      ['vi-VN']],
- ['Türkçe',          ['tr-TR']],
- ['اُردُو',            ['ur-PK', 'پاکستان'],
-                     ['ur-IN', 'بھارت']],
- ['Ελληνικά',         ['el-GR']],
- ['български',         ['bg-BG']],
- ['Pусский',          ['ru-RU']],
- ['Српски',           ['sr-RS']],
- ['Українська',        ['uk-UA']],
  ['中文',             ['cmn-Hans-CN', '普通话 (中国大陆)'],
                      ['cmn-Hans-HK', '普通话 (香港)'],
                      ['cmn-Hant-TW', '中文 (台灣)'],
@@ -374,6 +300,9 @@ if (!('webkitSpeechRecognition' in window)) {
     }
   };
 
+  var str_infomatica = "인포매티카";
+  var str_dshs = "대구과학고등학교";
+
   recognition.onresult = function(event) {
     var interim_transcript = '';
     if (typeof(event.results) == 'undefined') {
@@ -391,6 +320,9 @@ if (!('webkitSpeechRecognition' in window)) {
     }
     final_transcript = capitalize(final_transcript);
     final_span.innerHTML = linebreak(final_transcript);
+    if(final_transcript.localeCompare(str_infomatica)) {
+        alert("1");
+    }
     interim_span.innerHTML = linebreak(interim_transcript);
     if (final_transcript || interim_transcript) {
       showButtons('inline-block');
