@@ -49,7 +49,7 @@ new gweb.analytics.AutoTrack({
     text-decoration: none
     }
     #results {
-        max-width:500px;
+        max-width:800px;
       margin:50px auto;
       background:white;
       border-radius:5px;
@@ -131,29 +131,21 @@ a.c1 {font-weight: normal;}
           <p id="info_upgrade" style="display:none">
             이 앱은 크롬 브라우저에서 만 작동됩니다!
           </p>
-
           <p id="str_informatica_recog" style="display:none">
-                인포매티카!! 감사합니다.
+                <img src="informatica.gif" alt="인포매티카">
+          </p>
+          <p id="str_dshs_recog" style="display:none">
+                <img src="dshs.jpg" alt="대구과학고등학교">
           </p>
         </div>
         <div id="div_start">
           <button id="start_button" onclick="startButton(event)"><img alt="Start" id="start_img"
           src="mic.gif"></button>
         </div>
+        <br>
         <div id="results">
           <span class="final" id="final_span"></span> <span class="interim" id=
           "interim_span"></span>
-        </div>
-        <div id="copy">
-          <button class="button" id="copy_button" onclick="copyButton()">Copy and Paste</button>
-          <div id="copy_info">
-            <p>
-              Ctr + c 를 눌러 복사하세요
-            </p>
-            <p>
-              (Command-C on Mac)
-            </p>
-          </div>
         </div>
         <div class="compact marquee" id="div_language">
           <select id="select_language" onchange="updateCountry()">
@@ -307,8 +299,11 @@ if (!('webkitSpeechRecognition' in window)) {
     }
     final_transcript = capitalize(final_transcript);
     final_span.innerHTML = linebreak(final_transcript);
-    if(final_transcript.localeCompare(str_infomatica)==0) {
+    if(final_transcript.includes(str_infomatica)==true) {
         showInfo('str_informatica_recog');
+    }
+    if(final_transcript.includes(str_dshs)==true) {
+        showInfo('str_dshs_recog');
     }
     interim_span.innerHTML = linebreak(interim_transcript);
     if (final_transcript || interim_transcript) {
@@ -331,39 +326,6 @@ function linebreak(s) {
 var first_char = /\S/;
 function capitalize(s) {
   return s.replace(first_char, function(m) { return m.toUpperCase(); });
-}
-
-function createEmail() {
-  var n = final_transcript.indexOf('\n');
-  if (n < 0 || n >= 80) {
-    n = 40 + final_transcript.substring(40).indexOf(' ');
-  }
-  var subject = encodeURI(final_transcript.substring(0, n));
-  var body = encodeURI(final_transcript.substring(n + 1));
-  window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
-}
-
-function copyButton() {
-  if (recognizing) {
-    recognizing = false;
-    recognition.stop();
-  }
-  copy_button.style.display = 'none';
-  copy_info.style.display = 'inline-block';
-  showInfo('');
-}
-
-function emailButton() {
-  if (recognizing) {
-    create_email = true;
-    recognizing = false;
-    recognition.stop();
-  } else {
-    createEmail();
-  }
-  email_button.style.display = 'none';
-  email_info.style.display = 'inline-block';
-  showInfo('');
 }
 
 function startButton(event) {
