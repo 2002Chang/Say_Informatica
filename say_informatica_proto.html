@@ -108,50 +108,58 @@ a.c1 {font-weight: normal;}
         </div>
       </div>
       <div class="compact marquee">
+        <div id="results">
+                <span class="final" id="final_span"></span> <span class="interim" id=
+                "interim_span"></span>
+                  </div>
+                  <div class="compact marquee" id="div_language">
+                    <select id="select_language" onchange="updateCountry()">
+                      </select>&nbsp;&nbsp; <select id="select_dialect">
+                      </select>
+                  </div>
+                  <br>
+                  <br>
         <div id="info" align="center">
           <p id="info_start" align="center">
             마이크 버튼을 누르고 컴퓨터와 말을 해봐요!
           </p>
-          <p id="info_speak_now" style="display:none">
+          <p id="info_speak_now" style="display:none" align="center">
             마이크에 말해보세요.
           </p>
-          <p id="info_no_speech" style="display:none">
+          <p id="info_no_speech" style="display:none" align="center">
             마이크에 대고 말을 하길 바랍니다.
           </p>
-          <p id="info_allow" style="display:none">
+          <p id="info_allow" style="display:none" align="center">
             "허용" 버튼을 눌러야 컴퓨터랑 말할 수 있답니다.
           </p>
-          <p id="info_denied" style="display:none">
+          <p id="info_denied" style="display:none" align="center">
             "허용" 버튼을 누르지 않았습니다ㅠㅠ
           </p>
-          <p id="info_blocked" style="display:none">
+          <p id="info_blocked" style="display:none" align="center">
             "허용"이 지원되지 않습니다. 변경을 하려면
             <href>chrome://settings/contentExceptions#media-stream</href> 을 이용햐 주새요
           </p>
-          <p id="info_upgrade" style="display:none">
+          <p id="info_upgrade" style="display:none" align="center">
             이 앱은 크롬 브라우저에서 만 작동됩니다!
           </p>
-          <p id="str_informatica_recog" style="display:none">
+          <p id="str_informatica_recog" style="display:none" align="center">
                 <img src="informatica.gif" alt="인포매티카">
           </p>
-          <p id="str_dshs_recog" style="display:none">
+          <p id="str_dshs_recog" style="display:none" align="center">
                 <img src="dshs.jpg" alt="대구과학고등학교">
+          </p>
+          <p id=help style="display:none" align="center">
+                오른쪽의 마이크 버튼을 누르면 컴퓨터에게 말을 시작할 수 있습니다.<br>
+                컴퓨터에게 말을 해봐요!<br>
+                HINT: 동아리 이름과 학교 이름, 자신이 좋아하는 색깔을 말하면 놀라운 것이 일어납니다^^<br>
           </p>
         </div>
         <div id="div_start">
-          <button id="start_button" onclick="startButton(event)"><img alt="Start" id="start_img"
+            <button id="help_button" onclick="helpButton()"><img alt="help" id="help_img"src="help.png"></button>
+            <button id="start_button" onclick="startButton(event)"><img alt="Start" id="start_img"
           src="mic.gif"></button>
         </div>
         <br>
-        <div id="results">
-          <span class="final" id="final_span"></span> <span class="interim" id=
-          "interim_span"></span>
-        </div>
-        <div class="compact marquee" id="div_language">
-          <select id="select_language" onchange="updateCountry()">
-            </select>&nbsp;&nbsp; <select id="select_dialect">
-            </select>
-        </div>
       </div>
     </div><script src="www.google.com/intl/en/chrome/assets/common/js/chrome.min.js">
 </script> <script>
@@ -281,8 +289,10 @@ if (!('webkitSpeechRecognition' in window)) {
 
   var str_infomatica = "인포매티카";
   var str_dshs = "대구과학고등학교";
+  var recog_idx = 0;
 
   recognition.onresult = function(event) {
+    recog_idx++;
     var interim_transcript = '';
     if (typeof(event.results) == 'undefined') {
       recognition.onend = null;
@@ -299,14 +309,40 @@ if (!('webkitSpeechRecognition' in window)) {
     }
     final_transcript = capitalize(final_transcript);
     final_span.innerHTML = linebreak(final_transcript);
-    if(interim_transcript.includes(str_infomatica)==true) {
+    if(interim_transcript.includes(str_infomatica)==true && recog_idx!=0) {
         showInfo('str_informatica_recog');
+        recog_idx = 0;
     }
-    if(interim_transcript.includes(str_dshs)==true) {
+    if(interim_transcript.includes(str_dshs)==true && recog_idx!=1) {
         showInfo('str_dshs_recog');
+        recog_idx = 1;
+    }
+    if(interim_transcript.includes("빨강")==true && recog_idx!=2) {
+        document.body.style.backgroundColor = "red";
+        recog_idx = 2;
+    }
+    if(interim_transcript.includes("파랑")==true && recog_idx!=3) {
+        document.body.style.backgroundColor = "blue";
+        recog_idx = 3;
+    }
+    if(interim_transcript.includes("노랑")==true && recog_idx!=4) {
+        document.body.style.backgroundColor = "yellow";
+        recog_idx = 4;
+    }
+    if(interim_transcript.includes("초록")==true && recog_idx!=5) {
+        document.body.style.backgroundColor = "green";
+        recog_idx = 5;
+    }
+    if(interim_transcript.includes("보라")==true && recog_idx!=6) {
+        document.body.style.backgroundColor = "purple";
+        recog_idx = 6;
+    }
+    if(interim_transcript.includes("초록")==true && recog_idx!=7) {
+        document.body.style.backgroundColor = "green";
+        recog_idx = 7;
     }
     interim_span.innerHTML = linebreak(interim_transcript);
-    if (final_transcript || interim_transcript) {
+    if (final_transcript || interim_transcript && recog_idx!=1) {
       showButtons('inline-block');
     }
   };
@@ -329,6 +365,7 @@ function capitalize(s) {
 }
 
 function startButton(event) {
+    document.body.style.backgroundColor = "#ffc600";
   if (recognizing) {
     recognition.stop();
     return;
@@ -343,6 +380,12 @@ function startButton(event) {
   showInfo('info_allow');
   showButtons('none');
   start_timestamp = event.timeStamp;
+  document.body.style.backgroundColor = "#ffc600";
+
+}
+
+function helpButton() {
+    showInfo('help');
 }
 
 function showInfo(s) {
