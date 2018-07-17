@@ -108,7 +108,7 @@ a.c1 {font-weight: normal;}
         </div>
       </div>
       <div class="compact marquee">
-        <div id="info">
+        <div id="info" align="center">
           <p id="info_start" align="center">
             마이크 버튼을 누르고 컴퓨터와 말을 해봐요!
           </p>
@@ -299,10 +299,10 @@ if (!('webkitSpeechRecognition' in window)) {
     }
     final_transcript = capitalize(final_transcript);
     final_span.innerHTML = linebreak(final_transcript);
-    if(final_transcript.includes(str_infomatica)==true) {
+    if(interim_transcript.includes(str_infomatica)==true) {
         showInfo('str_informatica_recog');
     }
-    if(final_transcript.includes(str_dshs)==true) {
+    if(interim_transcript.includes(str_dshs)==true) {
         showInfo('str_dshs_recog');
     }
     interim_span.innerHTML = linebreak(interim_transcript);
