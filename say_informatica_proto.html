@@ -45,6 +45,9 @@ new gweb.analytics.AutoTrack({
     #div_start {
     float: right;
     }
+    #div_help {
+    float: left;
+    }
     #headline {
     text-decoration: none
     }
@@ -107,13 +110,16 @@ a.c1 {font-weight: normal;}
           </h1>
         </div>
       </div>
-      
+      <br>
       <div class="compact marquee">
+            <div id="div_help">
+                    <button id="help_button" onclick="helpButton()" align="left"><img alt="help" id="help_img"src="help.jpg" height="42" width="42"></button>
+            </div>
             <div id="div_start">
-                    <button id="help_button" onclick="helpButton()"><img alt="help" id="help_img"src="help.png" height="42" width="42"></button>
-                    <button id="start_button" onclick="startButton(event)"><img alt="Start" id="start_img"
+                    <button id="start_button" onclick="startButton(event)" algin="right"><img alt="Start" id="start_img"
                   src="mic.gif"></button>
                 </div>
+                <br>
                 <br>
         <div id="results">
                 <span class="final" id="final_span"></span> <span class="interim" id=
@@ -414,5 +420,9 @@ function showButtons(style) {
   email_info.style.display = 'none';
 }
     </script>
+    <br><br><br><br><br><br>
+    <div algin="center">
+        <h6 align="center">2018 Infromatica © 장준서 all rights reserved</h6>
+    </div>
   </body>
 </html>
