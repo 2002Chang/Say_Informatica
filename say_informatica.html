@@ -330,6 +330,7 @@
 
       var str_infomatica = "인포매티카";
       var str_dshs = "대구과학고등학교";
+      var baron = "서형우";
       var recog_idx = 0;
 
       recognition.onresult = function (event) {
@@ -382,7 +383,7 @@
           document.body.style.backgroundColor = "green";
           recog_idx = 7;
         }
-        if (interim_transcript.includes("서형우") == true && recog_idx != 8) {
+        if (interim_transcript.includes(baron) == true && recog_idx != 8) {
           showInfo('baron');
           recog_idx = 8;
         }
